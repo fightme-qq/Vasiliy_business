@@ -1,0 +1,88 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Континент - Каталог</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Континент" class="brand-logo" />
+      <div>
+        <p class="brand-name" id="brand-title">Континент</p>
+        <p class="brand-sub">Спецодежда и трикотаж собственного производства</p>
+      </div>
+    </a>
+
+    <div class="top-actions">
+      <input id="search-input" class="search" placeholder="Поиск по каталогу" />
+      <button class="btn btn-cart" id="open-cart">Корзина <span class="badge" id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="catalog reveal">
+      <div class="catalog-head">
+        <h1 id="catalog-title">Каталог товаров</h1>
+        <p>Сначала товары, потом детали о компании. Используйте фильтры и поиск для быстрого выбора.</p>
+      </div>
+      <div id="category-list" class="chip-row"></div>
+      <div id="products-grid" class="grid"></div>
+    </section>
+
+    <section class="info-tabs reveal">
+      <div class="tab-buttons" role="tablist" aria-label="Информация о компании">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="about">О компании</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="why">Почему выбирают нас</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="contacts">Контакты</button>
+      </div>
+
+      <article id="tab-about" class="tab-panel active" role="tabpanel">
+        <h2>О компании</h2>
+        <p id="about-lead"></p>
+      </article>
+
+      <article id="tab-why" class="tab-panel" role="tabpanel" hidden>
+        <h2>Почему выбирают нас</h2>
+        <ul id="about-points" class="about-points"></ul>
+      </article>
+
+      <article id="tab-contacts" class="tab-panel" role="tabpanel" hidden>
+        <h2>Контакты</h2>
+        <p>Отдел продаж: <a id="about-email" href="#"></a></p>
+        <p class="hint">Заказ можно оформить без регистрации через корзину.</p>
+      </article>
+    </section>
+  </main>
+
+  <section id="cart-panel" class="cart-panel">
+    <div class="cart-header">
+      <h2>Корзина</h2>
+      <button id="close-cart" class="link-btn">Закрыть</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <p>Итого: <strong id="cart-total">0 руб.</strong></p>
+      <form id="checkout-form" class="checkout-form">
+        <h3>Оформление заказа</h3>
+        <input id="checkout-name" required placeholder="Ваше имя" />
+        <input id="checkout-phone" required placeholder="Телефон" />
+        <input id="checkout-email" type="email" placeholder="Email (необязательно)" />
+        <textarea id="checkout-comment" placeholder="Комментарий к заказу"></textarea>
+        <button class="btn btn-big" type="submit">Подтвердить заказ</button>
+      </form>
+      <p id="checkout-result" class="success"></p>
+    </div>
+  </section>
+
+  <script type="module" src="js/catalog.js"></script>
+</body>
+</html>
