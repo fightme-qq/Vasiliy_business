@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -6,19 +6,16 @@
   <title>Товар - Континент</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Континент">
       <img src="assets/logo.png" alt="Континент" class="brand-logo" />
-      <div>
-        <p class="brand-name">Континент</p>
-        <p class="brand-sub">Каталог товаров</p>
-      </div>
+      <span class="brand-mark">Континент</span>
     </a>
-    <a href="index.html" class="btn">Корзина <span class="badge" id="cart-count">0</span></a>
+    <a href="index.html#catalog" class="btn btn-cart">Корзина <span class="badge" id="cart-count">0</span></a>
   </header>
 
   <main class="product-page" id="product-root"></main>

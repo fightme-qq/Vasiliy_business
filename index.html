@@ -1,52 +1,71 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Континент - Каталог</title>
+  <title>Континент - Производственный каталог</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-
   <header class="topbar">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="Континент">
       <img src="assets/logo.png" alt="Континент" class="brand-logo" />
-      <div>
-        <p class="brand-name" id="brand-title">Континент</p>
-        <p class="brand-sub">Спецодежда и трикотаж собственного производства</p>
-      </div>
+      <span class="brand-mark" id="brand-title">Континент</span>
     </a>
 
     <div class="top-actions">
-      <input id="search-input" class="search" placeholder="Поиск по каталогу" />
+      <label class="search-wrap">
+        <span>Найти</span>
+        <input id="search-input" class="search" placeholder="куртка, брюки, флис" />
+      </label>
       <button class="btn btn-cart" id="open-cart">Корзина <span class="badge" id="cart-count">0</span></button>
     </div>
   </header>
 
   <main class="page">
-    <section class="catalog reveal">
-      <div class="catalog-head">
-        <h1 id="catalog-title">Каталог товаров</h1>
-        <p>Сначала товары, потом детали о компании. Используйте фильтры и поиск для быстрого выбора.</p>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Подольск / собственное производство</p>
+        <h1>Спецодежда, которая выглядит собранно после реальной смены.</h1>
+        <p class="hero-lead">
+          Каталог формы, трикотажа и утепленных вещей для работы, службы и активного режима.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-big" href="#catalog">Смотреть каталог</a>
+          <button class="btn btn-ghost" id="hero-cart">Открыть корзину</button>
+        </div>
       </div>
-      <div id="category-list" class="chip-row"></div>
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/products/9m.webp" alt="" class="hero-product hero-product-main" />
+        <img src="assets/products/24m.webp" alt="" class="hero-product hero-product-back" />
+        <div class="hero-spec">
+          <strong id="catalog-count">20</strong>
+          <span>позиций в текущей поставке</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog reveal" id="catalog">
+      <div class="section-head">
+        <p class="eyebrow">Складская витрина</p>
+        <h2 id="catalog-title">Каталог товаров</h2>
+      </div>
+      <div id="category-list" class="chip-row" aria-label="Фильтр по категориям"></div>
       <div id="products-grid" class="grid"></div>
     </section>
 
     <section class="info-tabs reveal">
       <div class="tab-buttons" role="tablist" aria-label="Информация о компании">
         <button class="tab-btn active" role="tab" aria-selected="true" data-tab="about">О компании</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="why">Почему выбирают нас</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="why">Преимущества</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="contacts">Контакты</button>
       </div>
 
       <article id="tab-about" class="tab-panel active" role="tabpanel">
-        <h2>О компании</h2>
+        <h2>Сделано для регулярной эксплуатации</h2>
         <p id="about-lead"></p>
       </article>
 
@@ -56,21 +75,21 @@
       </article>
 
       <article id="tab-contacts" class="tab-panel" role="tabpanel" hidden>
-        <h2>Контакты</h2>
-        <p>Отдел продаж: <a id="about-email" href="#"></a></p>
-        <p class="hint">Заказ можно оформить без регистрации через корзину.</p>
+        <h2>Связь с отделом продаж</h2>
+        <p>Почта: <a id="about-email" href="#"></a></p>
+        <p class="hint">Заказ сохраняется локально в браузере и готов к отправке менеджеру.</p>
       </article>
     </section>
   </main>
 
-  <section id="cart-panel" class="cart-panel">
+  <section id="cart-panel" class="cart-panel" aria-label="Корзина">
     <div class="cart-header">
       <h2>Корзина</h2>
       <button id="close-cart" class="link-btn">Закрыть</button>
     </div>
     <div id="cart-items" class="cart-items"></div>
     <div class="cart-footer">
-      <p>Итого: <strong id="cart-total">0 руб.</strong></p>
+      <p class="cart-total">Итого: <strong id="cart-total">0 руб.</strong></p>
       <form id="checkout-form" class="checkout-form">
         <h3>Оформление заказа</h3>
         <input id="checkout-name" required placeholder="Ваше имя" />

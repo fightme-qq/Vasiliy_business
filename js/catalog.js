@@ -26,7 +26,8 @@ function byId(id) {
 
 function renderHeader() {
   byId('brand-title').textContent = state.site.brand;
-  byId('catalog-title').textContent = `${state.site.catalogTitle} (${state.products.length})`;
+  byId('catalog-title').textContent = state.site.catalogTitle;
+  byId('catalog-count').textContent = state.products.length;
   byId('cart-count').textContent = cartCount();
 }
 
@@ -85,6 +86,7 @@ function renderProducts() {
         <div class="card-body">
           <p class="card-category">${escapeHtml(p.category)}</p>
           <a href="product.html?id=${p.id}" class="card-title">${escapeHtml(p.title)}</a>
+          <p class="card-desc">${escapeHtml(p.description).slice(0, 116)}...</p>
           <div class="card-bottom">
             <p class="card-price">${formatPrice(p.price)}</p>
             <button class="btn" data-add-id="${p.id}">В корзину</button>
@@ -222,6 +224,7 @@ function setupSearch() {
 function setupCartToggle() {
   const panel = byId('cart-panel');
   byId('open-cart').addEventListener('click', () => panel.classList.add('open'));
+  byId('hero-cart').addEventListener('click', () => panel.classList.add('open'));
   byId('close-cart').addEventListener('click', () => panel.classList.remove('open'));
 }
 
