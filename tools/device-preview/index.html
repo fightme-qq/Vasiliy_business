@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Preview - Континент</title>
+  <style>
+    :root {
+      --bg: #101412;
+      --panel: #1a211d;
+      --line: rgba(255, 250, 240, 0.18);
+      --text: #fffaf0;
+      --muted: rgba(255, 250, 240, 0.64);
+      --signal: #f2c230;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px) 0 0 / 64px 64px,
+        linear-gradient(0deg, rgba(255,255,255,0.028) 1px, transparent 1px) 0 0 / 64px 64px,
+        var(--bg);
+    }
+
+    .shell {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(16, 20, 18, 0.88);
+    }
+
+    label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    select,
+    input,
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--panel);
+      padding: 7px 9px;
+      font: inherit;
+    }
+
+    input[type="url"] {
+      width: min(42vw, 560px);
+      min-width: 240px;
+    }
+
+    button {
+      cursor: pointer;
+      color: #101412;
+      border-color: var(--signal);
+      background: var(--signal);
+      font-weight: 700;
+    }
+
+    .stage {
+      display: grid;
+      place-items: center;
+      overflow: auto;
+      padding: 28px;
+    }
+
+    .device {
+      border: 14px solid #060807;
+      border-radius: 34px;
+      background: #060807;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+      transform-origin: top center;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 19px;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <form class="toolbar" id="controls">
+      <label>
+        Preset
+        <select id="preset">
+          <option value="390x844">iPhone 15</option>
+          <option value="844x390">iPhone Landscape</option>
+          <option value="412x915">Android Tall</option>
+          <option value="915x412">Android Landscape</option>
+          <option value="820x1180">Tablet</option>
+          <option value="1366x768">16:9 Landscape</option>
+          <option value="1024x768">4:3 Landscape</option>
+        </select>
+      </label>
+      <label>
+        Zoom
+        <select id="zoom">
+          <option value="1">100%</option>
+          <option value="0.85" selected>85%</option>
+          <option value="0.7">70%</option>
+          <option value="0.55">55%</option>
+        </select>
+      </label>
+      <label>
+        URL
+        <input id="target" type="url" value="__TARGET_URL__" />
+      </label>
+      <button type="button" id="rotate">Rotate</button>
+      <button type="submit">Reload</button>
+    </form>
+
+    <section class="stage">
+      <div class="device" id="device">
+        <iframe id="frame" title="Local device preview"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const preset = document.getElementById('preset');
+    const zoom = document.getElementById('zoom');
+    const target = document.getElementById('target');
+    const rotate = document.getElementById('rotate');
+    const frame = document.getElementById('frame');
+    const device = document.getElementById('device');
+    const controls = document.getElementById('controls');
+
+    function applySize() {
+      const [width, height] = preset.value.split('x').map(Number);
+      device.style.width = `${width}px`;
+      device.style.height = `${height}px`;
+      device.style.transform = `scale(${zoom.value})`;
+    }
+
+    function reloadFrame() {
+      frame.src = target.value;
+    }
+
+    preset.addEventListener('change', applySize);
+    zoom.addEventListener('change', applySize);
+    rotate.addEventListener('click', () => {
+      const [width, height] = preset.value.split('x');
+      preset.value = `${height}x${width}`;
+      if (preset.value !== `${height}x${width}`) {
+        const option = new Option(`Custom ${height}x${width}`, `${height}x${width}`);
+        preset.add(option);
+        preset.value = option.value;
+      }
+      applySize();
+    });
+    controls.addEventListener('submit', (event) => {
+      event.preventDefault();
+      reloadFrame();
+    });
+
+    applySize();
+    reloadFrame();
+  </script>
+</body>
+</html>
