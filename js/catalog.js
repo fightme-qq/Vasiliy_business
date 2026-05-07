@@ -288,6 +288,15 @@ function activateReveal(nodes) {
   const list = Array.from(nodes || []);
   if (!list.length) return;
 
+  if (!('IntersectionObserver' in window)) {
+    list.forEach((node) => node.classList.add('in'));
+    return;
+  }
+
+  const fallback = window.setTimeout(() => {
+    list.forEach((node) => node.classList.add('in'));
+  }, 900);
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -301,6 +310,8 @@ function activateReveal(nodes) {
   );
 
   list.forEach((node) => observer.observe(node));
+
+  window.setTimeout(() => window.clearTimeout(fallback), 2200);
 }
 
 async function main() {
